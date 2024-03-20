@@ -4,48 +4,6 @@ import AIchatbotRights from "../components/AIchatbotRights";
 
 const DisabilityRightsInfo = () => {
   const [currentPage, setCurrentPage] = useState("Legal Aid Chatbot");
-  const [flashCardData, setFlashCardData] = useState([
-    {
-      section: "Rights",
-      title: "Non-Discrimination",
-      desc: "Right to be free from discrimination based on disability in all aspects of employment, as per the Americans with Disabilities Act (ADA).",
-    },
-    {
-      section: "Schemes",
-      title: "Ticket to Work Program",
-      desc: "Initiative facilitating access to employment services and vocational rehabilitation for Social Security disability beneficiaries.",
-    },
-    {
-      section: "Benefits",
-      title: "Employee Assistance Programs (EAP)",
-      desc: "Access to counseling and support services for personal and work-related issues.",
-    },
-    {
-      section: "Rights",
-      title: "Reasonable Accommodations",
-      desc: "Right to request and receive reasonable accommodations that enable equal opportunities in the workplace.",
-    },
-    {
-      section: "Rights",
-      title: "Equal Pay",
-      desc: "Right to receive equal pay for equal work, regardless of disability status.",
-    },
-    {
-      section: "Rights",
-      title: "Confidentiality",
-      desc: "Right to the confidentiality of medical information and protection from unnecessary inquiries about disability.",
-    },
-    {
-      section: "Schemes",
-      title: "Job Accommodation Network (JAN)",
-      desc: "Free consulting service providing information on workplace accommodations and disability employment issues.",
-    },
-    {
-      section: "Benefits",
-      title: "Health Insurance Protections",
-      desc: "Access to health insurance coverage without discrimination based on disability, under the Affordable Care Act.",
-    },
-  ]);
   return (
     <div style={{ textAlign: "left", padding: "2rem", fontSize: "1.25rem" }}>
       <div
@@ -61,18 +19,7 @@ const DisabilityRightsInfo = () => {
           color: "#2234da",
           // padding: "1rem",
         }}
-      >
-        <div
-          style={{
-            textDecoration:
-              currentPage === "Flash Cards" ? "underline" : "none",
-            color: currentPage === "Flash Cards" ? "#e38a43" : "#2234da",
-          }}
-          onClick={() => setCurrentPage("Flash Cards")}
-        >
-          Flash Cards
-        </div>
-        
+      > 
         <div
           style={{
             textDecoration:
@@ -93,43 +40,6 @@ const DisabilityRightsInfo = () => {
           Government Schemes
         </div> */}
       </div>
-      {currentPage === "Flash Cards" && (
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            // margin: "2rem",
-            gap: "2rem",
-          }}
-        >
-          {flashCardData?.map((Card) => {
-            return (
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front" style={{ padding: "1rem" }}>
-                    {/* <p style={{ fontWeight: 600 }}>FLIP CARD</p> */}
-                    <p style={{ fontWeight: 800, fontSize: "1.5rem" }}>
-                      {Card.title}
-                    </p>
-                    <p>Hover Me</p>
-                  </div>
-                  <div class="flip-card-back" style={{ padding: "0.75rem" }}>
-                    <p style={{ fontWeight: 600 }}>{Card.section}</p>
-                    <div>
-                      <strong style={{ marginRight: "0.3rem" }}>
-                        {Card.title}:
-                      </strong>
-                      {Card.desc}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-      
       {currentPage === "Legal Resources" && (
         <div>
           <div
