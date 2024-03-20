@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Button } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 import { BsStars, BsFillMicFill, BsFillPauseFill } from "react-icons/bs";
 
+
 const AIchatbotRights = () => {
+  const [loading, setLoading] = useState(false); 
   const [promptString, setPromptString] = useState("");
   const [generatedText, setGeneratedText] = useState("");
   const [isListening, setIsListening] = useState(false);
@@ -30,6 +32,7 @@ const AIchatbotRights = () => {
 
   const handleGenerateText = async () => {
     try {
+      setLoading(true);
       const response = await fetch(
         "https://api.edenai.run/v2/text/generation",
         {
@@ -59,6 +62,8 @@ const AIchatbotRights = () => {
       });
     } catch (error) {
       console.error("Error fetching data:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -147,6 +152,15 @@ const AIchatbotRights = () => {
       </div>
       <div style={{ width: "80vw", margin: "auto" }}>
         <strong>Generated Text Output:</strong>
+        <p>
+        {loading && <Spinner
+                thickness='4px'
+                speed='0.65s'
+                emptyColor='gray.200'
+                color='blue.500'
+                size='xl'
+            />}
+            </p>
         <p>{generatedText}</p>
       </div>
     </div>

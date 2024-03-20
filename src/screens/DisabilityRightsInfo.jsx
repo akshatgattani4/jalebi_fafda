@@ -11,13 +11,11 @@ const DisabilityRightsInfo = () => {
           display: "flex",
           flexDirection: "row",
           gap: "1.5rem",
-          // border: "2px solid gray",
           marginBottom: "2rem",
           fontWeight: 600,
           fontSize: "1.7rem",
           justifyContent: "center",
           color: "#2234da",
-          // padding: "1rem",
         }}
       > 
         <div
@@ -29,17 +27,7 @@ const DisabilityRightsInfo = () => {
           onClick={() => setCurrentPage("Legal Aid Chatbot")}
         >
           Legal Aid Chatbot
-        </div>
-        {/* <div
-          style={{
-            textDecoration:
-              currentPage === "Government Schemes" ? "underline" : "none",
-          }}
-          onClick={() => setCurrentPage("Government Schemes")}
-        >
-          Government Schemes
-        </div> */}
-      </div>
+        </div></div>
       {currentPage === "Legal Resources" && (
         <div>
           <div

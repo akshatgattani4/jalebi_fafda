@@ -6,8 +6,8 @@ const YoutubeSearch = ({ title }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [videos, setVideos] = useState([]);
   const [videoSummary, setVideoSummary] = useState("");
-  const [loading, setLoading] = useState(false); // State for managing loading status
-  const [loading2, setLoading2] = useState(false); // State for managing loading status
+  const [loading, setLoading] = useState(false); 
+  const [loading2, setLoading2] = useState(false); 
 
   const [ques, setques] = useState([]);
 
@@ -15,13 +15,13 @@ const YoutubeSearch = ({ title }) => {
     try {
       setLoading(true);
       setVideoSummary("");
-      setques([]); // Set loading to true when search starts
+      setques([]); 
       const summary = await summarizeVideo(12);
       setVideoSummary(summary);
     } catch (error) {
       console.error("Error fetching YouTube data:", error);
     } finally {
-      setLoading(false); // Set loading to false when search completes
+      setLoading(false);
     }
   };
 
