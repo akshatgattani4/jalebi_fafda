@@ -68,53 +68,6 @@ const VirtualAssistant = () => {
     salary: "", // New field
   });
 
-  // useEffect(() => {
-  //   const fetchJobs = async () => {
-  //     try {
-  //       const db = getFirestore();
-  //       const applicantsCollection = await getDocs(
-  //         collection(db, "applicants")
-  //       );
-  //       const applicantsData = applicantsCollection.docs.map((doc) => ({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       }));
-  //       setApplicants(applicantsData);
-  //       const jobsCollection = await getDocs(collection(db, "jobs"));
-  //       const jobsData = jobsCollection.docs.map((doc) => ({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       }));
-  //       console.log(jobsData);
-  //       setMeetings(jobsData);
-
-        
-  //     } catch (error) {
-  //       console.error("Error fetching jobs:", error);
-  //     }
-  //   };
-
-  //   fetchJobs();
-  // }, []);
-
-  // const acceptApplicant = async (uid) => {
-  //   console.log(uid);
-  //   const db = getFirestore();
-  //   const userDocRef = doc(db, "applicants", uid);
-  //   let data = [];
-  //   try {
-  //     const userDocSnapshot = await getDoc(userDocRef);
-  //     if (userDocSnapshot.exists()) {
-  //       data = [...data, userDocSnapshot.data()];
-  //       console.log(data);
-  //       setInterviewers(data);
-  //     } else {
-  //       console.error("User data not found in Firestore");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -234,43 +187,11 @@ const VirtualAssistant = () => {
               paddingTop: "0",
               paddingBottom: "0",
             }}
-            color="#2234da"
+            color="white"
+            backgroundColor="#ff5045"
             onClick={onMeetModalOpen}
           >
             +
-          </Button>
-          <Button
-            variant="outline"
-            boxShadow="xl"
-            transition="transform 0.2s" // Add a smooth transition effect
-            _hover={{ transform: "scale(1.05)" }}
-            style={{
-              marginLeft: "0.5rem",
-              fontSize: "0.7rem",
-              padding: "0.5rem",
-              paddingTop: "0",
-              paddingBottom: "0",
-            }}
-            color="#2234da"
-          >
-            Meeting in 15 mins
-          </Button>
-          <Button
-            variant="solid"
-            boxShadow="xl"
-            transition="transform 0.2s" // Add a smooth transition effect
-            _hover={{ transform: "scale(1.05)" }}
-            style={{
-              fontSize: "0.7rem",
-              padding: "0.5rem",
-              paddingTop: "0",
-              paddingBottom: "0",
-              marginLeft: "0.5rem",
-            }}
-            backgroundColor="#ff5045"
-            color="white"
-          >
-            Update Interview Availability
           </Button>
         </div>
       </div>
