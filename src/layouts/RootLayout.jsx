@@ -1,7 +1,6 @@
 import React from "react";
 import VoiceButton from "../components/VoiceButton";
 import SpeechSynthesizer from "../components/SpeechSynthesizer";
-import CustomCursor from "../components/CustomCursor";
 
 import { useContext } from "react";
 import { MouseContext } from "../context/mouse-context";
@@ -15,7 +14,6 @@ export default function RootLayout() {
     <>
       <LandingTop />
       <div className="App">
-      <CustomCursor />
       <div className="container">
         <div
           onMouseEnter={() => cursorChangeHandler("hovered")}
