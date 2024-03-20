@@ -19,7 +19,8 @@ import LandingTop from "./components/LandingTop";
 import Feedback from "./screens/Feedback";
 import ResumeBuilder from "./screens/ResumeBuilder";
 import VirtualAssistant from "./screens/VirtualAssistant";
-import Dashboard from "./screens/Dashboard"
+import Dashboard from "./screens/Dashboard";
+import DisabilityRightsInfo from "./screens/DisabilityRightsInfo";
 
 export const UserContext = createContext(null);
 
@@ -137,6 +138,10 @@ function App() {
                   <Route path="/aicourse" element={<AiCourse />} />
                   <Route path="/web" element={<YoutubeSearch />} />
                   <Route path="/aivideo" element={<AiVideo />} />
+                  <Route
+                    path="/disabilityrightsinfo"
+                    element={<DisabilityRightsInfo />}
+                  />
                   <Route path="/landing2" element={<LandingTop />} />
                   <Route path="/feedback" element={<Feedback />} />
                   <Route path="/dashboard" element={<Dashboard />} />

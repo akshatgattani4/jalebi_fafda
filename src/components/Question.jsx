@@ -3,8 +3,9 @@ import { Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AppContext from "../AppContext";
 import { ArrowRight } from "@material-ui/icons";
-import { BsStars } from "react-icons/bs";
 import { UserContext } from "../App";
+import { useState, useEffect } from "react";
+import { BsStars, BsFillMicFill, BsFillPauseFill } from "react-icons/bs";
 
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -76,6 +77,41 @@ function Question() {
     setEnhancedAnswer("");
   }, [questionAnswer.answer]);
 
+  const [promptString, setPromptString] = useState("");
+  const [generatedText, setGeneratedText] = useState("");
+  const [isListening, setIsListening] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const recognition = new window.webkitSpeechRecognition();
+
+  useEffect(() => {
+    recognition.onresult = (event) => {
+      const result = event.results[0][0].transcript;
+      setPromptString(result);
+    };
+
+    recognition.onend = () => {
+      if (!isPaused) {
+        startListening();
+      }
+    };
+
+    return () => {
+      recognition.abort();
+    };
+  }, [isPaused]);
+
+  const startListening = () => {
+    recognition.start();
+    setIsListening(true);
+    setIsPaused(false);
+  };
+
+  const pauseListening = () => {
+    recognition.stop();
+    setIsPaused(true);
+  };
+
   return (
     <div>
       <form noValidate autoComplete="on" onSubmit={nextQuestion}>
@@ -83,10 +119,31 @@ function Question() {
           id="standard-basic"
           label={questionAnswer.question}
           name={questionAnswer.resumeFieldId}
-          value={enhancedAnswer || questionAnswer.answer || ""}
+          value={enhancedAnswer || questionAnswer.answer || promptString}
           onChange={handleChangeInput}
           style={{ width: "30rem" }}
         />
+        <Button
+          onClick={isListening ? pauseListening : startListening}
+          className="aicourse-button"
+          style={{
+            marginLeft: "0.5rem",
+            backgroundColor: isListening ? "red" : "#2234da",
+            padding: "1rem",
+            color: "white",
+            height: "3.5rem",
+          }}
+        >
+          {isListening ? (
+            isPaused ? (
+              <BsFillMicFill />
+            ) : (
+              <BsFillPauseFill />
+            )
+          ) : (
+            <BsFillMicFill />
+          )}
+        </Button>
         <div className={classes.buttonContainer}>
           <Button
             type="submit"
