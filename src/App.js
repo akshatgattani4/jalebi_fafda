@@ -18,6 +18,7 @@ import TextReader from "./components/TextReader";
 import LandingTop from "./components/LandingTop";
 import Feedback from "./screens/Feedback";
 import ResumeBuilder from "./screens/ResumeBuilder";
+import Dashboard from "./screens/Dashboard";
 
 export const UserContext = createContext(null);
 
@@ -133,6 +134,7 @@ function App() {
                   <Route path="/aivideo" element={<AiVideo />} />
                   <Route path="/landing2" element={<LandingTop />} />
                   <Route path="/feedback" element={<Feedback />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
               </div>
               <Footer />
