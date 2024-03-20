@@ -591,7 +591,12 @@ const Dashboard = () => {
                   </a>
                 </div>
                 <div></div>
-                <div></div>
+                <div>
+                  Disability PDF:{" "}
+                  <input type="file" onChange={handleFileChange} />
+                </div>
+                {/* <div></div>
+                <div></div> */}
               </div>
             </div>
             <div
@@ -621,6 +626,7 @@ const Dashboard = () => {
                     {user ? user.WorkExperience + " years" : "-"}
                   </a>
                 </div>
+
                 <div>
                   Resume:{" "}
                   <button
@@ -806,6 +812,7 @@ const Dashboard = () => {
                     }}
                   >
                     <div style={{ color: "#2234da" }}>Accepted</div>
+
                     <div>0</div>
                   </div>
                 </div>
@@ -823,9 +830,149 @@ const Dashboard = () => {
             }}
           ></div>
         </div>
+        <div style={{ textAlign: "left", flex: 0.4 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              fontWeight: 625,
+            }}
+          >
+            <div>Recommended Jobs</div>
+            <div style={{ color: "#ff5045", cursor: "pointer" }}>See More</div>
+          </div>
+          {Jobs.map((job) => {
+            return (
+              <Card
+                direction={{ base: "column", sm: "row" }}
+                overflow="hidden"
+                variant="outline"
+                style={{ marginTop: "1rem" }}
+                boxShadow="xl"
+                transition="transform 0.3s" // Add a smooth transition effect
+                _hover={{ transform: "scale(1.02)" }}
+              >
+                <CardBody style={{ textAlign: "left" }}>
+                  <Heading size="md" style={{ paddingBottom: "0.5rem" }}>
+                    {job?.Role}
+                  </Heading>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    <Text pb="2">{job.CompanyName}</Text>•
+                    <Text pb="2">{job?.Disability}</Text>•
+                    <Text pb="2">{job?.Experience} years experience</Text>
+                  </div>
+                  <hr />
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingTop: "0.5rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "left",
+                        gap: "0.5rem",
+                      }}
+                    >
+                      <div>₹{job.Salary}</div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          gap: "0.25rem",
+                        }}
+                      >
+                        <FaRegStar />
+                        {job.Rating}
+                      </div>
+                    </div>
+                    <div onClick={addApplicant} style={{ color: "gray" }}>
+                      <button
+                        style={{
+                          color: "#ff5045",
+                          cursor: "pointer",
+                          fontWeight: 700,
+                          border: "1px solid lightgray",
+                          borderRadius: "0.5rem",
+                          paddingLeft: "0.5rem",
+                          paddingRight: "0.5rem",
+                          fontSize: "0.8rem",
+                          marginRight: "0.5rem",
+                        }}
+                      >
+                        Apply
+                      </button>
+                      {time(job.Posted)}
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
+            );
+          })}
+        </div>
       </div>
 
       {/* // Modal  */}
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit profile</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormLabel>Gender</FormLabel>
+            <Input
+              onChange={(e) => setGender(e.target.value)}
+              type="tel"
+              placeholder="Enter gender"
+            />
+            <FormLabel style={{ paddingTop: "0.4rem" }}>Blood group</FormLabel>
+            <Input
+              onChange={(e) => setBloodGrp(e.target.value)}
+              type="tel"
+              placeholder="Enter blood group"
+            />
+            <FormLabel style={{ paddingTop: "0.4rem" }}>Role</FormLabel>
+            <Input
+              onChange={(e) => setRole(e.target.value)}
+              type="tel"
+              placeholder="Enter role"
+            />
+            <FormLabel style={{ paddingTop: "0.4rem" }}>
+              Work experience
+            </FormLabel>
+            <Input
+              onChange={(e) => setWorkExperience(e.target.value)}
+              type="tel"
+              placeholder="Enter work experience in years"
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              style={{
+                backgroundColor: "#ff5045",
+                color: "white",
+                margin: "auto",
+              }}
+              onClick={addDetails}
+            >
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
