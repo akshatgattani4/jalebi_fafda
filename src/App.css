@@ -9,6 +9,7 @@
 }
 * {
   font-family: "poppins";
+  cursor : auto;
 }
 body {
   background-color: #e4e5ef;
