@@ -15,11 +15,14 @@ import AiVideo from "./screens/AiVideo";
 import ReadAloud from "./components/ReadAloud";
 import { HStack, Stack } from "@chakra-ui/react";
 import TextReader from "./components/TextReader";
+import AccessibilityMenu from "./components/AccessibilityMenu";
 import LandingTop from "./components/LandingTop";
+import VoiceButton from "./components/VoiceButton";
 import Feedback from "./screens/Feedback";
 import ResumeBuilder from "./screens/ResumeBuilder";
 import VirtualAssistant from "./screens/VirtualAssistant";
-import Dashboard from "./screens/Dashboard";
+import Dashboard from "./screens/Dashboard"
+import JobBoard from "./components/JobBoard";
 import DisabilityRightsInfo from "./screens/DisabilityRightsInfo";
 
 export const UserContext = createContext(null);
@@ -123,6 +126,9 @@ function App() {
                 zIndex={1000}
               >
                 <ReadAloud value={screenReader} handleChangeInput={setScreenReader}/>
+                <VoiceButton/>
+                <AccessibilityMenu />
+                <div></div>
                 <div></div>
               </HStack>
 
@@ -145,6 +151,7 @@ function App() {
                   <Route path="/landing2" element={<LandingTop />} />
                   <Route path="/feedback" element={<Feedback />} />
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/jobs" element={<JobBoard/>} />
                 </Routes>
               </div>
               <Footer />

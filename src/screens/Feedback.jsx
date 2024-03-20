@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { db } from "../Firebase";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import {
   Box,
   FormControl,
@@ -21,6 +23,8 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 
+//const db = getFirestore();
+
 const Feedback = () => {
   const [feedback, setFeedback] = useState({
     name: "",
@@ -41,12 +45,10 @@ const Feedback = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    // You can add your logic here to submit the feedback
-    // For now, just simulate a successful submission
+  const handleSubmit = async () => {
+    const docRef = await addDoc(collection(db, "feedback"), feedback);
+    //const res = await db.collection("feedback").add(feedback);
     setSubmitted(true);
-
-    // Show a toast message
     toast({
       title: "Feedback Submitted",
       description: "Thank you for your feedback!",

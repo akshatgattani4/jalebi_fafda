@@ -272,16 +272,12 @@ const Dashboard = () => {
 
   const handleIconClick = () => {
     setShowDropdown(!showDropdown);
-
-    // setNotificationDetails(fetchNotificationDetails());
   };
 
   const fetchNotificationDetails = () => {
-    // Replace this with your logic to fetch notification details from the server
     return [
       { id: 1, text: "Notification 1" },
       { id: 2, text: "Notification 2" },
-      // Add more notification details as needed
     ];
   };
 
