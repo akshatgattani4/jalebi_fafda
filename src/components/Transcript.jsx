@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from "react";
+import { Spinner } from '@chakra-ui/react';
 import axios from "axios";
 
 const YoutubeSearch = ({ title }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [videos, setVideos] = useState([]);
   const [videoSummary, setVideoSummary] = useState("");
+  const [loading, setLoading] = useState(false); // State for managing loading status
+  const [loading2, setLoading2] = useState(false); // State for managing loading status
 
   const [ques, setques] = useState([]);
 
   const handleSearch = async () => {
     try {
-      // const response = await axios.get(
-      //   `https://www.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_YOUTUBE_API_KEY}&q=${title}&videoDuration=medium&videoEmbeddable=true&type=video&maxResults=5`
-      // );
-
-      // setVideos(response.data.items);
-
-      // if (response.data.items.length > 0) {
-      //   const videoId = response.data.items[0].id.videoId;
-      // }
+      setLoading(true);
+      setVideoSummary("");
+      setques([]); // Set loading to true when search starts
       const summary = await summarizeVideo(12);
       setVideoSummary(summary);
     } catch (error) {
       console.error("Error fetching YouTube data:", error);
+    } finally {
+      setLoading(false); // Set loading to false when search completes
     }
   };
 
   const summarizeVideo = async (videoId) => {
     try {
-      // const videoUrl = https://www.youtube.com/embed/${videoId};
       const response = await fetch(
         "https://api.edenai.run/v2/text/generation",
         {
@@ -52,11 +50,14 @@ const YoutubeSearch = ({ title }) => {
       }
 
       const data = await response.json();
+      setLoading2(true);
       generateQuestionsAndAnswers(data.openai.generated_text);
       return data.openai.generated_text;
     } catch (error) {
       console.error("Error generating summary:", error);
       return "";
+    }finally {
+      setLoading2(false); // Set loading to false when search completes
     }
   };
 
@@ -72,8 +73,6 @@ const YoutubeSearch = ({ title }) => {
           },
           body: JSON.stringify({
             providers: "openai",
-            //   text: ` generate 5 ques on ${videoSummary} with 4 options answers the answers options should not exceed the number the response  \n\n exapmle reponse should be in format of html with tags ,display
-            //  `,
             text: `Based on the video summary provided, generate 5 multiple-choice questions related to the content. Each question should have four possible answers. The output should be structured in JSON format, similar to the example provided. 
 
           Video Summary: '${summary}'
@@ -114,12 +113,6 @@ const YoutubeSearch = ({ title }) => {
 
   return (
     <div>
-      {/* <input
-        type="text"
-        placeholder="Enter your search query"
-        value={title}
-        // onChange={(e) => setSearchQuery(e.target.value)}
-      /> */}
       <button onClick={handleSearch}>Search</button>
 
       <div
@@ -170,6 +163,13 @@ const YoutubeSearch = ({ title }) => {
             >
               Summary for the First Video
             </h2>
+            {loading && <Spinner
+                thickness='4px'
+                speed='0.65s'
+                emptyColor='gray.200'
+                color='blue.500'
+                size='xl'
+            />}
             <p>{videoSummary}</p>
           </div>
         </div>
@@ -187,13 +187,14 @@ const YoutubeSearch = ({ title }) => {
             Questions and Answers
           </h2>
           {console.log(typeof ques)}
-          {/* {ques?.map((question) => {
-            return (
-              <div>
-                <div>{question.question}</div>
-              </div>
-            );
-          })} */}
+          {loading2 && <Spinner
+                thickness='4px'
+                speed='0.65s'
+                emptyColor='gray.200'
+                color='blue.500'
+                size='xl'
+            />}
+          
           {Array.isArray(ques) ? (
             ques.map((question) => (
               <div key={question.id} style={{ marginTop: "0.7rem" }}>
