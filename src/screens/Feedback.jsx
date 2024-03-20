@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { db } from "../Firebase";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import {
   Box,
   FormControl,
@@ -21,6 +23,8 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 
+//const db = getFirestore();
+
 const Feedback = () => {
   const [feedback, setFeedback] = useState({
     name: "",
@@ -41,7 +45,9 @@ const Feedback = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const docRef = await addDoc(collection(db, "feedback"), feedback);
+    //const res = await db.collection("feedback").add(feedback);
     setSubmitted(true);
     toast({
       title: "Feedback Submitted",
