@@ -22,6 +22,7 @@ import Feedback from "./screens/Feedback";
 import ResumeBuilder from "./screens/ResumeBuilder";
 import VirtualAssistant from "./screens/VirtualAssistant";
 import Dashboard from "./screens/Dashboard"
+import JobBoard from "./components/JobBoard";
 
 export const UserContext = createContext(null);
 
@@ -145,6 +146,7 @@ function App() {
                   <Route path="/landing2" element={<LandingTop />} />
                   <Route path="/feedback" element={<Feedback />} />
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/jobs" element={<JobBoard/>} />
                 </Routes>
               </div>
               <Footer />
