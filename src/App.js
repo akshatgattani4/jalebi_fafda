@@ -18,6 +18,7 @@ import TextReader from "./components/TextReader";
 import LandingTop from "./components/LandingTop";
 import Feedback from "./screens/Feedback";
 import ResumeBuilder from "./screens/ResumeBuilder";
+import VirtualAssistant from "./screens/VirtualAssistant";
 
 export const UserContext = createContext(null);
 
@@ -127,6 +128,10 @@ function App() {
                 <Routes>
                   <Route path="/" element={<RootLayout />} />
                   <Route path="/signup" element={<Signup />} />
+                  <Route
+                    path="/virtualassistant"
+                    element={<VirtualAssistant />}
+                  />
                   <Route path="/resumebuilder" element={<ResumeBuilder />} />
                   <Route path="/aicourse" element={<AiCourse />} />
                   <Route path="/web" element={<YoutubeSearch />} />
