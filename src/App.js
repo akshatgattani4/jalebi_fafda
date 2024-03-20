@@ -18,6 +18,7 @@ import TextReader from "./components/TextReader";
 import LandingTop from "./components/LandingTop";
 import Feedback from "./screens/Feedback";
 import ResumeBuilder from "./screens/ResumeBuilder";
+import VirtualAssistant from "./screens/VirtualAssistant";
 
 export const UserContext = createContext(null);
 
