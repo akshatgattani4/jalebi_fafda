@@ -19,6 +19,7 @@ import LandingTop from "./components/LandingTop";
 import Feedback from "./screens/Feedback";
 import ResumeBuilder from "./screens/ResumeBuilder";
 import VirtualAssistant from "./screens/VirtualAssistant";
+import Dashboard from "./screens/Dashboard"
 
 export const UserContext = createContext(null);
 
