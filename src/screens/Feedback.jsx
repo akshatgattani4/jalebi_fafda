@@ -42,11 +42,7 @@ const Feedback = () => {
   };
 
   const handleSubmit = () => {
-    // You can add your logic here to submit the feedback
-    // For now, just simulate a successful submission
     setSubmitted(true);
-
-    // Show a toast message
     toast({
       title: "Feedback Submitted",
       description: "Thank you for your feedback!",
