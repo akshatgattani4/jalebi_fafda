@@ -17,6 +17,7 @@ import { HStack, Stack } from "@chakra-ui/react";
 import TextReader from "./components/TextReader";
 import LandingTop from "./components/LandingTop";
 import Feedback from "./screens/Feedback";
+import ResumeBuilder from "./screens/ResumeBuilder";
 
 export const UserContext = createContext(null);
 
@@ -126,6 +127,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<RootLayout />} />
                   <Route path="/signup" element={<Signup />} />
+                  <Route path="/resumebuilder" element={<ResumeBuilder />} />
                   <Route path="/aicourse" element={<AiCourse />} />
                   <Route path="/web" element={<YoutubeSearch />} />
                   <Route path="/aivideo" element={<AiVideo />} />
