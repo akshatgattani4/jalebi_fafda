@@ -50,19 +50,17 @@ const YoutubeSearch = ({ title }) => {
       }
 
       const data = await response.json();
-      setLoading2(true);
       generateQuestionsAndAnswers(data.openai.generated_text);
       return data.openai.generated_text;
     } catch (error) {
       console.error("Error generating summary:", error);
       return "";
-    }finally {
-      setLoading2(false); // Set loading to false when search completes
     }
   };
 
   const generateQuestionsAndAnswers = async (summary) => {
     try {
+      setLoading2(true);
       const response = await fetch(
         "https://api.edenai.run/v2/text/generation",
         {
@@ -108,6 +106,8 @@ const YoutubeSearch = ({ title }) => {
     } catch (error) {
       console.error("Error generating summary:", error);
       return "";
+    }finally{
+      setLoading2(false);
     }
   };
 
@@ -187,6 +187,8 @@ const YoutubeSearch = ({ title }) => {
             Questions and Answers
           </h2>
           {console.log(typeof ques)}
+          
+          <div>
           {loading2 && <Spinner
                 thickness='4px'
                 speed='0.65s'
@@ -194,6 +196,7 @@ const YoutubeSearch = ({ title }) => {
                 color='blue.500'
                 size='xl'
             />}
+            </div>
           
           {Array.isArray(ques) ? (
             ques.map((question) => (
