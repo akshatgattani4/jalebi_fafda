@@ -38,8 +38,6 @@ import {
 } from "react-icons/fa";
 import { FaArrowTrendUp, FaRightLong } from "react-icons/fa6";
 import { FaLocationArrow } from "react-icons/fa";
-import { TiTick } from "react-icons/ti";
-import axios from "axios";
 
 const FilterBox = ({ filterFunction }) => {
   const [position, setPosition] = useState("");

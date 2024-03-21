@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Spinner } from '@chakra-ui/react';
-import axios from "axios";
 
 const YoutubeSearch = ({ title }) => {
   const [searchQuery, setSearchQuery] = useState("");

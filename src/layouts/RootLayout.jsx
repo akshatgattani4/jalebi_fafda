@@ -1,6 +1,5 @@
 import React from "react";
 import VoiceButton from "../components/VoiceButton";
-import SpeechSynthesizer from "../components/SpeechSynthesizer";
 
 import { useContext } from "react";
 import { MouseContext } from "../context/mouse-context";

@@ -35,23 +35,7 @@ const LanguageButtons = () => {
     // Add more languages as needed
   ];
 
-  return (<></>
-    // <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} spacing={4} width="full">
-    //   {languages.map((language) => (
-    //     <Button
-    //       key={language.code}
-    //       width="full"
-    //       colorScheme="teal"
-    //       size={"lg"}
-    //       onFocus={() =>
-    //         SpeechRecognition.startListening({ language: language.code })
-    //       }
-    //     >
-    //       <Text fontSize="lg">{language.name}</Text>
-    //     </Button>
-    //   ))}
-    // </SimpleGrid>
-  );
+  return (<></>);
 };
 
 const VoiceButton = () => {
@@ -80,9 +64,9 @@ const VoiceButton = () => {
   const handleConfirmation = (confirmed) => {
     setConfirmation(confirmed);
 
-    if (confirmed && currentLink != "") {
+    if (confirmed && currentLink !== "") {
       navigate(`/${currentLink}`);
-      const initialSpeech = "Navigation to " + currentLink + "Completed";
+      const initialSpeech = "Navigation to " + currentLink + " Completed";
       const initialUtterance = new SpeechSynthesisUtterance(initialSpeech);
       window.speechSynthesis.speak(initialUtterance);
     }
@@ -90,6 +74,24 @@ const VoiceButton = () => {
     setCurrentLink("");
     setSaid(0);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "v") { // Customize the key as per your preference
+        if (isListening) {
+          stopListening();
+        } else {
+          startListening();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isListening]);
 
   useEffect(() => {
     let parsingText = transcript.toLowerCase();
@@ -126,28 +128,12 @@ const VoiceButton = () => {
       setCurrentLink("resumebuilder");
       navigate(`/${currentLink}`);
       stopListening();
-    } else if (parsingText.includes("blog") && !confirmation) {
-      setCurrentLink("blog");
-      navigate(`/${currentLink}`);
-      stopListening();
-    } else if (parsingText.includes("speech") && !confirmation) {
-      setCurrentLink("speech");
-      navigate(`/${currentLink}`);
-      stopListening();
-    } else if (parsingText.includes("web") && !confirmation) {
-      setCurrentLink("web");
-      navigate(`/${currentLink}`);
-      stopListening();
-    } else if (parsingText.includes("rights") && !confirmation) {
+    } else if (parsingText.includes("legal") && !confirmation) {
       setCurrentLink("disabilityrightsinfo");
       navigate(`/${currentLink}`);
       stopListening();
     } else if (parsingText.includes("video") && !confirmation) {
       setCurrentLink("aivideo");
-      navigate(`/${currentLink}`);
-      stopListening();
-    } else if (parsingText.includes("ocr") && !confirmation) {
-      setCurrentLink("ocr");
       navigate(`/${currentLink}`);
       stopListening();
     } else if (parsingText.includes("dashboard") && !confirmation) {
@@ -205,6 +191,7 @@ const VoiceButton = () => {
   if (!browserSupportsSpeechRecognition) {
     setStatus("Your browser does not support speech recognition.");
   }
+
   return (
     <Box color={"teal.800"} aria-label="Voice Assistant">
       <IconButton
@@ -212,7 +199,7 @@ const VoiceButton = () => {
         icon={<FaMicrophone />}
         aria-label="Voice Button"
         onClick={() => {
-          const initialSpeech = "Voice assistant, How may i help you today?";
+          const initialSpeech = "Voice assistant, How may I help you today?";
           const initialUtterance = new SpeechSynthesisUtterance(initialSpeech);
           window.speechSynthesis.speak(initialUtterance);
 
@@ -222,52 +209,52 @@ const VoiceButton = () => {
         size="lg"
         colorScheme="teal"
         aria-labelledby="voice-assistant"
-      />
+        />
 
-      <Drawer isOpen={isOpen} placement="bottom" onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader>Voice Assistant</DrawerHeader>
-          <DrawerBody>
-            {/* Your content here */}
-            <LanguageButtons />
-            <Card>
-              <Flex direction="column" align="center" justify="center">
-                <Text>{status}</Text>
+<Drawer isOpen={isOpen} placement="bottom" onClose={onClose}>
+    <DrawerOverlay />
+    <DrawerContent>
+      <DrawerHeader>Voice Assistant</DrawerHeader>
+      <DrawerBody>
+        {/* Your content here */}
+        <LanguageButtons />
+        <Card>
+          <Flex direction="column" align="center" justify="center">
+            <Text>{status}</Text>
 
-                <Text size={"3xl"} mt={4}>
-                  {transcript}
-                </Text>
-              </Flex>
-            </Card>
-          </DrawerBody>
-          <ModalFooter>
-            {isListening ? (
-              <Button
-                colorScheme="red"
-                aria-label="Stop Listening"
-                leftIcon={<Icon as={FaMicrophoneSlash} />}
-                width={"full"}
-                onClick={stopListening}
-              >
-                Stop Listening
-              </Button>
-            ) : (
-              <Button
-                style={{ backgroundColor: "#2234da", color: "white" }}
-                aria-label="Start Listening"
-                leftIcon={<Icon as={FaMicrophoneAlt} />}
-                width={"full"}
-                onClick={startListening}
-              >
-                Start Listening
-              </Button>
-            )}
-          </ModalFooter>
-        </DrawerContent>
-      </Drawer>
-    </Box>
-  );
+            <Text size={"3xl"} mt={4}>
+              {transcript}
+            </Text>
+          </Flex>
+        </Card>
+      </DrawerBody>
+      <ModalFooter>
+        {isListening ? (
+          <Button
+            colorScheme="red"
+            aria-label="Stop Listening"
+            leftIcon={<Icon as={FaMicrophoneSlash} />}
+            width={"full"}
+            onClick={stopListening}
+          >
+            Stop Listening
+          </Button>
+        ) : (
+          <Button
+            style={{ backgroundColor: "#2234da", color: "white" }}
+            aria-label="Start Listening"
+            leftIcon={<Icon as={FaMicrophoneAlt} />}
+            width={"full"}
+            onClick={startListening}
+          >
+            Start Listening
+          </Button>
+        )}
+      </ModalFooter>
+    </DrawerContent>
+  </Drawer>
+</Box>
+);
 };
 
 export default VoiceButton;

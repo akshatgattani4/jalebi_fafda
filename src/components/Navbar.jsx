@@ -323,7 +323,7 @@ const NAV_ITEMS = [
     to: "/community",
   },
   {
-    label: "Education",
+    label: "Legal",
     to: "/disabilityrightsinfo",
   },
   {

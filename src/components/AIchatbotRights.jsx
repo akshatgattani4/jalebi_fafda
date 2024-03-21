@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
 import { BsStars, BsFillMicFill, BsFillPauseFill } from "react-icons/bs";
+import { fontWeight } from "@mui/system";
 
 
 const AIchatbotRights = () => {

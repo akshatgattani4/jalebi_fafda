@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { auth } from "../Firebase";
-import axios from "axios";
 import { FaRegCalendarCheck, FaRegStar, FaTable } from "react-icons/fa";
 import { getFirestore, doc, getDocs, collection } from "firebase/firestore";
 import {
